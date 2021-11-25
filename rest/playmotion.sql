@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `canciones`
 --
 
+CREATE DATABASE playmotion;
+
+USE playmotion;
+
 CREATE TABLE `canciones` (
   `id` int(10) NOT NULL,
   `nombre` varchar(100) NOT NULL,
