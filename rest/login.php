@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"]=="OPTIONS"){
 $metodo = $_SERVER['REQUEST_METHOD'];
 switch($metodo){
     case 'GET':
-        if(isset($_GET['usuarios']) && isset($_GET['contrasenia'])){
+        if(isset($_GET['usuario']) && isset($_GET['contrasenia'])){
             $c = conexion();
             $s = $c->prepare("SELECT * FROM usuarios WHERE usuario=:u AND contrasenia=sha1(:p)");
             $s->bindValue(":u", $_GET['usuario']);
@@ -47,6 +47,8 @@ switch($metodo){
             header("HTTP/1.1 400 Bad Request");
         }
         break;
+
+        
     default:
         header("HTTP/1.1 400 Bad Request");
 }
