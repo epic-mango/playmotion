@@ -1,4 +1,4 @@
-package com.aldeanos.playmotion;
+package com.aldeanos.playmotion.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +13,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.aldeanos.playmotion.databinding.FragmentLoginBinding;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginFragment extends Fragment {
 
@@ -47,7 +51,7 @@ public class LoginFragment extends Fragment {
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(getContext());
-                String url ="/rest";
+                String url ="localhost/playmotion/rest/login.php";
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -65,7 +69,15 @@ public class LoginFragment extends Fragment {
                         Log.println(Log.DEBUG,"MANGO",error.toString());
                         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<>();
+
+                        
+                        return super.getHeaders();
+                    }
+                };
 
                 // Add the request to the RequestQueue.
                 queue.add(stringRequest);

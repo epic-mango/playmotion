@@ -1,4 +1,4 @@
-package com.aldeanos.playmotion;
+package com.aldeanos.playmotion.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.aldeanos.playmotion.databinding.FragmentSecondBinding;
+import com.aldeanos.playmotion.databinding.FragmentExplorarBinding;
 
 public class SecondFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentExplorarBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +21,7 @@ public class SecondFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentExplorarBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

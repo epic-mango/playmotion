@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.aldeanos.playmotion.LoginFragment"
+        android:name="com.aldeanos.playmotion.ui.LoginFragment"
         tools:layout="@layout/fragment_login">
 
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.aldeanos.playmotion.SecondFragment"
+        android:name="com.aldeanos.playmotion.ui.SecondFragment"
         tools:layout="@layout/fragment_explorar">
 
         <action
