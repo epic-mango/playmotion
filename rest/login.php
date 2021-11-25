@@ -58,7 +58,22 @@ if (isset($h['Authorization'])) {
             }
             break;
         case 'POST':
-            //Signup
+        $c = conexion();
+        $s = $c->prepare("INSERT INTO usuarios(usuario, nombre, contrasenia, fechanacimiento)VALUES(:u,:s, sha1(:v),:f)");
+        $s->bindValue(":u",$_POST['usuario']);
+        $s->bindValue(":s",$_POST['nombre']);
+        $s->bindValue(":v",$_POST['contrasenia']);
+        $s->bindValue(":f",$_POST['fechanacimiento']);
+        $s->execute();
+        if($s->rowCount()){
+            $jwt = JWT::create(['usuario' => $_POST['usuario']], Config::FIR, 7200);
+            $m = array('signup' => 'yes', 'jwt' => $jwt);
+        echo json_encode($m);
+
+        }else{
+            $r = ['signup' => 'no'];
+            echo json_encode($r);
+        }
             break;
 
 
