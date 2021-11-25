@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(getContext());
-                String url ="https://www.google.com";
+                String url ="/rest";
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
