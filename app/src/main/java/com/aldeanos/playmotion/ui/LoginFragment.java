@@ -51,7 +51,7 @@ public class LoginFragment extends Fragment {
 
                 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(getContext());
-                String url ="localhost/playmotion/rest/login.php";
+                String url ="192.168.1.99/playmotion/rest/login.php";
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -62,6 +62,8 @@ public class LoginFragment extends Fragment {
                                 Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
 
                                 //TODO: loggearse solo cuando hay token
+
+
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -74,8 +76,8 @@ public class LoginFragment extends Fragment {
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> headers = new HashMap<>();
 
-                        
-                        return super.getHeaders();
+                        headers.put("Authorization","");
+                        return headers;
                     }
                 };
 
