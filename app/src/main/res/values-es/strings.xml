@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Playmotion</string>
+    <string name="action_settings">Configuración</string>
+    <string name="user">Nombre de usuario</string>
+    <string name="pass">Contraseña</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="signup">Crear Usuario</string>
+</resources>
