@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "d3ebdfc5-d125-43c4-a395-faf8860bc925",
+		"name": "playmotion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/playmotion/rest/registrocanciones.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"playmotion",
+						"rest",
+						"registrocanciones.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "sxbris",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "sabrina",
+							"type": "text"
+						},
+						{
+							"key": "contrasenia",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "fechanacimiento",
+							"value": "1999-09-13",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/playmotion/rest/login.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"playmotion",
+						"rest",
+						"login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guardar cancion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYkZKVk9KRUxBd09FYWRqdUE4WitEbHUwV2V6OWFxN1RqUDk1XC9qXC9uRXM9IiwiaWF0IjoxNjM3ODgyNjQxLCJleHAiOjE2Mzc4ODk4NDEsImRhdGEiOnsidXN1YXJpbyI6InN4YnJpcyJ9fQ.9zaaEHq0ROopIopCVUgzNeiYDESap4Ed_66V8wLnt8U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "red",
+							"type": "text"
+						},
+						{
+							"key": "artista",
+							"value": "taylor swift",
+							"type": "text"
+						},
+						{
+							"key": "album",
+							"value": "red",
+							"type": "text"
+						},
+						{
+							"key": "fechanacimiento",
+							"value": "1999-09-13",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/playmotion/rest/canciones.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"playmotion",
+						"rest",
+						"canciones.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
