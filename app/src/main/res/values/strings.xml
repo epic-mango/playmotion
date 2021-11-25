@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Playmotion</string>
+    <string name="action_settings">Settings</string>
+    <string name="user">Username</string>
+    <string name="pass">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <!-- Strings used for fragments for navigation -->
+
+</resources>
