@@ -10,12 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.aldeanos.playmotion.R;
 import com.aldeanos.playmotion.config.ServerConfig;
-import com.aldeanos.playmotion.databinding.FragmentLoginBinding;
+import com.aldeanos.playmotion.databinding.FragmentSignupBinding;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,9 +28,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginFragment extends Fragment {
+public class SignupFragment extends Fragment {
 
-    private FragmentLoginBinding binding;
+    private FragmentSignupBinding binding;
 
     @Override
     public View onCreateView(
@@ -40,10 +38,7 @@ public class LoginFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
-
-
-
+        binding = FragmentSignupBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -51,16 +46,20 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        NavController navigation = NavHostFragment.findNavController(LoginFragment.this);
-
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
 
-                if (binding.etUsuario.getText().toString().equals("") && binding.etPass.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
-                } else {
+                if (binding.etName.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_name), Toast.LENGTH_SHORT).show();
+                } else if (binding.etPass.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_pass), Toast.LENGTH_SHORT).show();
+                } else if (binding.etDate.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_birthdate), Toast.LENGTH_SHORT).show();
+                } else if (binding.etUserName.getText().toString().equals("") ) {
+                    Toast.makeText(getContext(), getString(R.string.missing_user), Toast.LENGTH_SHORT).show();
+                } else{
 
                     // Instantiate the RequestQueue.
                     RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -69,23 +68,21 @@ public class LoginFragment extends Fragment {
 
                     uri.encodedPath(url);
 
-                    uri.appendQueryParameter("usuario", binding.etUsuario.getText().toString());
-                    uri.appendQueryParameter("contrasenia", binding.etPass.getText().toString());
-
                     // Request a string response from the provided URL.
-                    StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.build().toString(),
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, uri.build().toString(),
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     Log.println(Log.DEBUG, "MANGO", response);
 
+
                                     //TODO: loggearse solo cuando hay token
                                     try {
                                         JSONObject respuesta = new JSONObject(response);
 
-                                        String login = respuesta.getString("login");
+                                        String signup = respuesta.getString("signup");
 
-                                        if (login.equals("si")) {
+                                        if (signup.equals("si")) {
 
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();
@@ -104,6 +101,19 @@ public class LoginFragment extends Fragment {
                         }
                     }) {
                         @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<>();
+
+                            params.put("nombre", binding.etName.getText().toString());
+                            params.put("usuario", binding.etUserName.getText().toString());
+                            params.put("contrasenia", binding.etPass.getText().toString());
+                            params.put("fechanacimiento", binding.etDate.getText().toString());
+
+
+                            return params;
+                        }
+
+                        @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String> headers = new HashMap<>();
                             return headers;
@@ -114,16 +124,6 @@ public class LoginFragment extends Fragment {
                     // Add the request to the RequestQueue.
                     queue.add(stringRequest);
                 }
-
-            }
-        });
-
-        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                navigation.navigate(R.id.Navigate_Login_Signup);
-
 
             }
         });
