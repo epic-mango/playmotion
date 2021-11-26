@@ -1,5 +1,7 @@
 package com.aldeanos.playmotion.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.aldeanos.playmotion.R;
 import com.aldeanos.playmotion.config.ServerConfig;
+import com.aldeanos.playmotion.config.UserData;
 import com.aldeanos.playmotion.databinding.FragmentLoginBinding;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -53,6 +56,11 @@ public class LoginFragment extends Fragment {
 
         NavController navigation = NavHostFragment.findNavController(LoginFragment.this);
 
+        UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).getString(UserData.TOKEN_KEY);
+
+        //TODO: Verificar el token, si es correcto navegar directamente a Explorar.
+        //TODO: Ocultar los elementos de entrada y poner una pantalla de carga si no se ha conectado al servicio de tokens.
+
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +93,12 @@ public class LoginFragment extends Fragment {
 
                                         String login = respuesta.getString("login");
 
-                                        if (login.equals("si")) {
+                                        if (login.equals("yes")) {
+
+                                            String token = respuesta.getString("jwt");
+                                            UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).saveString(UserData.TOKEN_KEY, token);
+
+                                            //TODO: Implementar navegación a explorar.
 
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();

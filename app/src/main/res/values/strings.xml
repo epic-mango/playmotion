@@ -13,6 +13,7 @@
     <string name="missing_pass">Missing Password</string>
     <string name="missing_birthdate">Missing Birth Date</string>
     <string name="missing_user">Missing Username</string>
+    <string name="signup_error">Signup error</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>

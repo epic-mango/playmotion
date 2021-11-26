@@ -1,5 +1,6 @@
 package com.aldeanos.playmotion.ui;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +11,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.aldeanos.playmotion.R;
 import com.aldeanos.playmotion.config.ServerConfig;
+import com.aldeanos.playmotion.config.UserData;
 import com.aldeanos.playmotion.databinding.FragmentSignupBinding;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -46,6 +50,8 @@ public class SignupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        NavController navigation = NavHostFragment.findNavController(SignupFragment.this);
+
         binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,9 +63,9 @@ public class SignupFragment extends Fragment {
                     Toast.makeText(getContext(), getString(R.string.missing_pass), Toast.LENGTH_SHORT).show();
                 } else if (binding.etDate.getText().toString().equals("")) {
                     Toast.makeText(getContext(), getString(R.string.missing_birthdate), Toast.LENGTH_SHORT).show();
-                } else if (binding.etUserName.getText().toString().equals("") ) {
+                } else if (binding.etUserName.getText().toString().equals("")) {
                     Toast.makeText(getContext(), getString(R.string.missing_user), Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
 
                     // Instantiate the RequestQueue.
                     RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -82,7 +88,11 @@ public class SignupFragment extends Fragment {
 
                                         String signup = respuesta.getString("signup");
 
-                                        if (signup.equals("si")) {
+                                        if (signup.equals("yes")) {
+                                            String token = respuesta.getString("jwt");
+                                            UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).saveString(UserData.TOKEN_KEY, token);
+
+                                            //TODO: Implementar navegación a explorar.
 
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();
@@ -97,7 +107,7 @@ public class SignupFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.println(Log.DEBUG, "MANGO", error.toString());
-                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.signup_error), Toast.LENGTH_SHORT).show();
                         }
                     }) {
                         @Override
