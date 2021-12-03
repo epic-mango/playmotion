@@ -25,4 +25,15 @@
             android:id="@+id/Navigate_Signup_Login"
             app:destination="@id/LoginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/ExplorarFragment"
+        android:name="com.aldeanos.playmotion.ui.ExplorarFragment"
+        tools:layout="@layout/fragment_explorar"
+        android:label="@string/signup">
+
+        <action
+            android:id="@+id/Navigate_Signup_Login"
+            app:destination="@id/LoginFragment" />
+    </fragment>
 </navigation>

@@ -15,4 +15,5 @@
     <string name="missing_birthdate">Falta la fecha de nacimiento</string>
     <string name="missing_user">Falta el nombre de usuario</string>
     <string name="signup_error">Error al crear el usuario</string>
+    <string name="hello_blank_fragment">Hola</string>
 </resources>
