@@ -17,4 +17,5 @@
     <string name="signup_error">Error al crear el usuario</string>
     <string name="hello_blank_fragment">Hola</string>
     <string name="search">Buscar por título de canción</string>
+    <string name="label_songs">Etiquetar canciones</string>
 </resources>

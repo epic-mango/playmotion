@@ -19,6 +19,9 @@ import com.aldeanos.playmotion.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -34,7 +37,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        Set<Integer> topLevelDestinations = new HashSet<>();
+
+        topLevelDestinations.add(R.id.LoginFragment);
+        topLevelDestinations.add(R.id.ExplorarFragment);
+
+        appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestinations).build();
+
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 

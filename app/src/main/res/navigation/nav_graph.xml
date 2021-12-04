@@ -34,7 +34,7 @@
         android:id="@+id/ExplorarFragment"
         android:name="com.aldeanos.playmotion.ui.explorar.ExplorarFragment"
         tools:layout="@layout/fragment_explorar"
-        android:label="@string/signup">
+        android:label="@string/label_songs">
 
     </fragment>
 </navigation>

@@ -17,6 +17,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search by song title</string>
+    <string name="label_songs">Label songs</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>
