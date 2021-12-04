@@ -1,5 +1,5 @@
 <?php
-//pegar aqui el codigo que mando el profe 
+
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Authorization, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Allow, Access-Control-Allow-Origin");
