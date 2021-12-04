@@ -134,6 +134,8 @@ INSERT INTO `emociones` (`id`, `emocion`) VALUES
 (80, 'stupid'),
 (81, 'remorseful');
 
+----------------------------
+
 -- --------------------------------------------------------
 
 --
@@ -199,20 +201,20 @@ ALTER TABLE `usuarios`
 ALTER TABLE `emociones`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
+
   INSERT INTO canciones (nombre, artista, album) VALUES ("Melon soda", "tricot", "3");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Only happens when it rains", "Garbage", "Absolute");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Idioteque", "Alexa Melo", "Lotus Flower");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Russia On Ice", "Porcupine Tree", "Lightbulb Sun");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Lazy Eye", "Silversun Pickups", "Carnavas");
+
 INSERT INTO 'canciones' (nombre, artista,album) VALUES ('CyberSex','Doja Cat', 'Hot Pink'),
 ('Addiction','Doja Cat','Hot Pink'),
 ('Honey','Halsey','If i cant have love, i want power'),
 ('Color','Halsey','Badlands'),
 ('Libre','Angele','Nonante-Cinq'),
 ('I am not a woman, im a god','Halsey','If i cant have love, i want power');
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
+
 
 COMMIT;
 
