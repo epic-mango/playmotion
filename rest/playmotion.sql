@@ -7,6 +7,10 @@
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
+create database playmotion;
+
+use playmotion;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -137,7 +141,7 @@ INSERT INTO `emociones` (`id`, `emocion`) VALUES
 --
 
 CREATE TABLE `relaciones` (
-  `idusuario` int(11) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `idcancion` int(11) NOT NULL,
   `idemocion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -149,7 +153,6 @@ CREATE TABLE `relaciones` (
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(10) NOT NULL,
   `usuario` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `contrasenia` varchar(100) NOT NULL,
@@ -160,9 +163,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `usuario`, `nombre`, `contrasenia`, `fechanacimiento`) VALUES
-(4, 'code_groove', 'Juan Daniel Rodríguez Espinoza', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22'),
-(5, 'mango', 'Daniel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22');
+INSERT INTO `usuarios` ( `usuario`, `nombre`, `contrasenia`, `fechanacimiento`) VALUES
+( 'code_groove', 'Juan Daniel Rodríguez Espinoza', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22'),
+( 'mango', 'Daniel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22');
 
 --
 -- Índices para tablas volcadas
@@ -184,8 +187,7 @@ ALTER TABLE `emociones`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UQ_usuario` (`usuario`);
+  ADD PRIMARY KEY (`usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -200,8 +202,7 @@ ALTER TABLE `emociones`
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
