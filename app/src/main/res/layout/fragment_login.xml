@@ -12,6 +12,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:text="mango"
         android:hint="@string/user"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +22,7 @@
     <EditText
         android:id="@+id/etPass"
         android:layout_width="wrap_content"
+        android:text="123"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"

@@ -11,6 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f6d81459-5fdc-4a5c-be52-71ac87eea9d2" name="Default Changelist" comment="Ahora se consulta la lista de canciones y se muestra en el Log">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/aldeanos/playmotion/ui/explorar/ExplorarFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/aldeanos/playmotion/ui/explorar/ExplorarFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rest/canciones.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/canciones.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,11 +194,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/aldeanos/playmotion/ui/SignupFragment.java</url>
           <line>90</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/aldeanos/playmotion/ui/LoginFragment.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

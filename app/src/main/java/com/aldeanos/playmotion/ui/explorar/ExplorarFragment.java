@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,11 +59,19 @@ public class ExplorarFragment extends Fragment {
 
         token = getArguments().getString("token");
 
+
         ArrayList<Cancion> listaCanciones = new ArrayList<>();
 
-        listaCanciones.add(new Cancion("Nombre 1", "Artista 1", "Album 1", 1));
-        listaCanciones.add(new Cancion("Nombre 2", "Artista 2", "Album 2", 2));
-        listaCanciones.add(new Cancion("Nombre 3", "Artista 3", "Album 3", 3));
+
+
+        binding.rvCanciones.setAdapter(new CancionesAdapter(listaCanciones, new CancionesViewHolder.CancionesListener() {
+            @Override
+            public void onClic(int position) {
+                Toast.makeText(getContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        binding.rvCanciones.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
 
@@ -80,6 +89,23 @@ public class ExplorarFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.println(Log.DEBUG, "MANGO", response);
+
+                        try {
+                            JSONArray datos = new JSONArray(response);
+
+
+                            for (int i = 0; i < datos.length(); i++){
+                                JSONObject dato = (JSONObject) datos.get(i);
+
+                                listaCanciones.add(new Cancion(dato.getString("nombre"), dato.getString("artista"), dato.getString("album"), Integer.parseInt(dato.getString("id"))));
+
+                            }
+
+                            binding.rvCanciones.getAdapter().notifyDataSetChanged();
+                            Log.e("","");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -103,14 +129,66 @@ public class ExplorarFragment extends Fragment {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
-        binding.rvCanciones.setAdapter(new CancionesAdapter(listaCanciones, new CancionesViewHolder.CancionesListener() {
+        binding.btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClic(int position) {
-                Toast.makeText(getContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
-            }
-        }));
+            public void onClick(View view) {
+                listaCanciones.clear();
 
-        binding.rvCanciones.setLayoutManager(new LinearLayoutManager(getActivity()));
+                String url = ServerConfig.serverURL + "/playmotion/rest/canciones.php";
+                Uri.Builder uri = new Uri.Builder();
+
+                uri.appendQueryParameter("busqueda", binding.tvBusqueda.getText().toString());
+
+                uri.encodedPath(url);
+
+
+                // Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.build().toString(),
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.println(Log.DEBUG, "MANGO", response);
+
+                                try {
+                                    JSONArray datos = new JSONArray(response);
+
+
+                                    for (int i = 0; i < datos.length(); i++){
+                                        JSONObject dato = (JSONObject) datos.get(i);
+
+                                        listaCanciones.add(new Cancion(dato.getString("nombre"), dato.getString("artista"), dato.getString("album"), Integer.parseInt(dato.getString("id"))));
+
+                                    }
+
+                                    binding.rvCanciones.getAdapter().notifyDataSetChanged();
+                                    Log.e("","");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.println(Log.DEBUG, "MANGO", error.toString());
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<>();
+
+                        headers.put("Authorization", token );
+
+                        return headers;
+                    }
+
+                };
+
+                // Add the request to the RequestQueue.
+                queue.add(stringRequest);
+            }
+        });
 
         return binding.getRoot();
     }
