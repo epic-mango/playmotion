@@ -204,7 +204,12 @@ ALTER TABLE `emociones`
   INSERT INTO canciones (nombre, artista, album) VALUES ("Idioteque", "Alexa Melo", "Lotus Flower");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Russia On Ice", "Porcupine Tree", "Lightbulb Sun");
   INSERT INTO canciones (nombre, artista, album) VALUES ("Lazy Eye", "Silversun Pickups", "Carnavas");
-
+INSERT INTO 'canciones' (nombre, artista,album) VALUES ('CyberSex','Doja Cat', 'Hot Pink'),
+('Addiction','Doja Cat','Hot Pink'),
+('Honey','Halsey','If i cant have love, i want power'),
+('Color','Halsey','Badlands'),
+('Libre','Angele','Nonante-Cinq'),
+('I am not a woman, im a god','Halsey','If i cant have love, i want power');
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
