@@ -199,6 +199,12 @@ ALTER TABLE `usuarios`
 ALTER TABLE `emociones`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Melon soda", "tricot", "3");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Only happens when it rains", "Garbage", "Absolute");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Idioteque", "Alexa Melo", "Lotus Flower");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Russia On Ice", "Porcupine Tree", "Lightbulb Sun");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Lazy Eye", "Silversun Pickups", "Carnavas");
+
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
