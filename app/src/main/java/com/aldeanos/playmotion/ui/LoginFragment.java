@@ -1,7 +1,6 @@
 package com.aldeanos.playmotion.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +43,6 @@ public class LoginFragment extends Fragment {
     ) {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
-
 
 
         return binding.getRoot();
@@ -98,8 +96,7 @@ public class LoginFragment extends Fragment {
                                             String token = respuesta.getString("jwt");
                                             UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).saveString(UserData.TOKEN_KEY, token);
 
-                                            //TODO: Implementar navegación a explorar.
-
+                                            explorar(navigation);
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();
                                         }
@@ -134,10 +131,7 @@ public class LoginFragment extends Fragment {
         binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                navigation.navigate(R.id.Navigate_Login_Signup);
-
-
+                Toast.makeText(getContext(), ServerConfig.serverURL, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -146,6 +140,12 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void explorar(NavController navigation) {
+        Bundle bundle = new Bundle();
+        bundle.putString("token", UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).getString(UserData.TOKEN_KEY));
+        navigation.navigate(R.id.Navigate_Login_Explorar, bundle);
     }
 
 }

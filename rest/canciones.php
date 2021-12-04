@@ -28,7 +28,7 @@ if (isset($h['Authorization'])) {
 switch($metodo){
     case 'GET':
         $c = conexion();
-        $s =$c->prepate("SELECT * FROM canciones");
+        $s =$c->prepare("SELECT * FROM canciones");
         $s->execute();
         $s->setFetchMode(PDO::FETCH_ASSOC);
         $r = $s->fetchAll();

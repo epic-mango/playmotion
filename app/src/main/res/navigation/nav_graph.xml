@@ -14,6 +14,10 @@
         <action
             android:id="@+id/Navigate_Login_Signup"
             app:destination="@id/SignupFragment" />
+
+        <action
+            android:id="@+id/Navigate_Login_Explorar"
+            app:destination="@id/ExplorarFragment" />
     </fragment>
     <fragment
         android:id="@+id/SignupFragment"
@@ -28,12 +32,9 @@
 
     <fragment
         android:id="@+id/ExplorarFragment"
-        android:name="com.aldeanos.playmotion.ui.ExplorarFragment"
+        android:name="com.aldeanos.playmotion.ui.explorar.ExplorarFragment"
         tools:layout="@layout/fragment_explorar"
         android:label="@string/signup">
 
-        <action
-            android:id="@+id/Navigate_Signup_Login"
-            app:destination="@id/LoginFragment" />
     </fragment>
 </navigation>
