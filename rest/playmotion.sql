@@ -3,9 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2021 a las 01:58:28
+-- Tiempo de generación: 03-12-2021 a las 20:39:36
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
+
+create database playmotion;
+
+use playmotion;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +22,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `aiproject`
+-- Base de datos: `playmotion`
 --
 
 -- --------------------------------------------------------
@@ -26,10 +30,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `canciones`
 --
-
-CREATE DATABASE playmotion;
-
-USE playmotion;
 
 CREATE TABLE `canciones` (
   `id` int(10) NOT NULL,
@@ -143,7 +143,7 @@ INSERT INTO `emociones` (`id`, `emocion`) VALUES
 --
 
 CREATE TABLE `relaciones` (
-  `idusuario` int(11) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `idcancion` int(11) NOT NULL,
   `idemocion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -155,12 +155,19 @@ CREATE TABLE `relaciones` (
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(10) NOT NULL,
   `usuario` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `contrasenia` varchar(100) NOT NULL,
   `fechanacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` ( `usuario`, `nombre`, `contrasenia`, `fechanacimiento`) VALUES
+( 'code_groove', 'Juan Daniel Rodríguez Espinoza', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22'),
+( 'mango', 'Daniel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1996-07-22');
 
 --
 -- Índices para tablas volcadas
@@ -182,7 +189,7 @@ ALTER TABLE `emociones`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -195,6 +202,11 @@ ALTER TABLE `emociones`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Melon soda", "tricot", "3");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Only happens when it rains", "Garbage", "Absolute");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Idioteque", "Alexa Melo", "Lotus Flower");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Russia On Ice", "Porcupine Tree", "Lightbulb Sun");
+  INSERT INTO canciones (nombre, artista, album) VALUES ("Lazy Eye", "Silversun Pickups", "Carnavas");
 
 INSERT INTO 'canciones' (nombre, artista,album) VALUES ('CyberSex','Doja Cat', 'Hot Pink'),
 ('Addiction','Doja Cat','Hot Pink'),
@@ -202,6 +214,7 @@ INSERT INTO 'canciones' (nombre, artista,album) VALUES ('CyberSex','Doja Cat', '
 ('Color','Halsey','Badlands'),
 ('Libre','Angele','Nonante-Cinq'),
 ('I am not a woman, im a god','Halsey','If i cant have love, i want power');
+
 
 COMMIT;
 

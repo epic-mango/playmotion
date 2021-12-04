@@ -6,4 +6,16 @@
     <string name="pass">Contraseña</string>
     <string name="login">Iniciar Sesión</string>
     <string name="signup">Crear Usuario</string>
+    <string name="login_error">Usuario o contraseña incorrectos</string>
+    <string name="missing_information">Falta información</string>
+    <string name="name">Nombre</string>
+    <string name="birth_date">Fecha de nacimiento</string>
+    <string name="missing_name">Falta el nombre</string>
+    <string name="missing_pass">Falta la contraseña</string>
+    <string name="missing_birthdate">Falta la fecha de nacimiento</string>
+    <string name="missing_user">Falta el nombre de usuario</string>
+    <string name="signup_error">Error al crear el usuario</string>
+    <string name="hello_blank_fragment">Hola</string>
+    <string name="search">Buscar por título de canción</string>
+    <string name="label_songs">Etiquetar canciones</string>
 </resources>

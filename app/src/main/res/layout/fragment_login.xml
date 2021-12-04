@@ -12,6 +12,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:text="mango"
         android:hint="@string/user"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +22,7 @@
     <EditText
         android:id="@+id/etPass"
         android:layout_width="wrap_content"
+        android:text="123"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -43,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etPass" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

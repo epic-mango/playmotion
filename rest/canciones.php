@@ -27,12 +27,24 @@ if (isset($h['Authorization'])) {
         $metodo=$_SERVER['REQUEST_METHOD'];
 switch($metodo){
     case 'GET':
-        $c = conexion();
-        $s =$c->prepate("SELECT * FROM canciones");
-        $s->execute();
-        $s->setFetchMode(PDO::FETCH_ASSOC);
-        $r = $s->fetchAll();
-        echo json_encode($r);
+
+        if (isset($_GET['busqueda'])){
+            $c = conexion();
+            $s =$c->prepare("SELECT * FROM canciones where nombre LIKE :bus");
+            $s->bindValue(":bus", "%".$_GET['busqueda']."%");
+            $s->execute();
+            $s->setFetchMode(PDO::FETCH_ASSOC);
+            $r = $s->fetchAll();
+            echo json_encode($r);
+        }else{
+            $c = conexion();
+            $s =$c->prepare("SELECT * FROM canciones");
+            $s->execute();
+            $s->setFetchMode(PDO::FETCH_ASSOC);
+            $r = $s->fetchAll();
+            echo json_encode($r);
+        }
+        break;
     case 'POST':
         $c = conexion();
         $s = $c->prepare("INSERT INTO canciones(nombre, artista, album)VALUES(:u,:s,:v)");

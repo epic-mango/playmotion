@@ -3,24 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/LoginFragment"
         android:name="com.aldeanos.playmotion.ui.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/fragment_login"
+        android:label="@string/login">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/Navigate_Login_Signup"
+            app:destination="@id/SignupFragment" />
+
+        <action
+            android:id="@+id/Navigate_Login_Explorar"
+            app:destination="@id/ExplorarFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.aldeanos.playmotion.ui.SecondFragment"
-        tools:layout="@layout/fragment_explorar">
+        android:id="@+id/SignupFragment"
+        android:name="com.aldeanos.playmotion.ui.SignupFragment"
+        tools:layout="@layout/fragment_signup"
+        android:label="@string/signup">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/Navigate_Signup_Login"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ExplorarFragment"
+        android:name="com.aldeanos.playmotion.ui.explorar.ExplorarFragment"
+        tools:layout="@layout/fragment_explorar"
+        android:label="@string/label_songs">
+
     </fragment>
 </navigation>

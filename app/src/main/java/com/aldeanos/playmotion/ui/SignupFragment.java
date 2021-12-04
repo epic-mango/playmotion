@@ -17,7 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.aldeanos.playmotion.R;
 import com.aldeanos.playmotion.config.ServerConfig;
 import com.aldeanos.playmotion.config.UserData;
-import com.aldeanos.playmotion.databinding.FragmentLoginBinding;
+import com.aldeanos.playmotion.databinding.FragmentSignupBinding;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,9 +32,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginFragment extends Fragment {
+public class SignupFragment extends Fragment {
 
-    private FragmentLoginBinding binding;
+    private FragmentSignupBinding binding;
 
     @Override
     public View onCreateView(
@@ -42,9 +42,7 @@ public class LoginFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
-
-
+        binding = FragmentSignupBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -52,20 +50,21 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        NavController navigation = NavHostFragment.findNavController(LoginFragment.this);
+        NavController navigation = NavHostFragment.findNavController(SignupFragment.this);
 
-        UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).getString(UserData.TOKEN_KEY);
-
-        //TODO: Verificar el token, si es correcto navegar directamente a Explorar.
-        //TODO: Ocultar los elementos de entrada y poner una pantalla de carga si no se ha conectado al servicio de tokens.
-
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
 
-                if (binding.etUsuario.getText().toString().equals("") && binding.etPass.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), getString(R.string.missing_information), Toast.LENGTH_SHORT).show();
+                if (binding.etName.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_name), Toast.LENGTH_SHORT).show();
+                } else if (binding.etPass.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_pass), Toast.LENGTH_SHORT).show();
+                } else if (binding.etDate.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_birthdate), Toast.LENGTH_SHORT).show();
+                } else if (binding.etUserName.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), getString(R.string.missing_user), Toast.LENGTH_SHORT).show();
                 } else {
 
                     // Instantiate the RequestQueue.
@@ -75,28 +74,26 @@ public class LoginFragment extends Fragment {
 
                     uri.encodedPath(url);
 
-                    uri.appendQueryParameter("usuario", binding.etUsuario.getText().toString());
-                    uri.appendQueryParameter("contrasenia", binding.etPass.getText().toString());
-
                     // Request a string response from the provided URL.
-                    StringRequest stringRequest = new StringRequest(Request.Method.GET, uri.build().toString(),
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, uri.build().toString(),
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     Log.println(Log.DEBUG, "MANGO", response);
 
+
                                     //TODO: loggearse solo cuando hay token
                                     try {
                                         JSONObject respuesta = new JSONObject(response);
 
-                                        String login = respuesta.getString("login");
+                                        String signup = respuesta.getString("signup");
 
-                                        if (login.equals("yes")) {
-
+                                        if (signup.equals("yes")) {
                                             String token = respuesta.getString("jwt");
                                             UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).saveString(UserData.TOKEN_KEY, token);
 
-                                            explorar(navigation);
+                                            //TODO: Implementar navegación a explorar.
+
                                         } else {
                                             Toast.makeText(getContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();
                                         }
@@ -110,9 +107,22 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.println(Log.DEBUG, "MANGO", error.toString());
-                            Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.signup_error), Toast.LENGTH_SHORT).show();
                         }
                     }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<>();
+
+                            params.put("nombre", binding.etName.getText().toString());
+                            params.put("usuario", binding.etUserName.getText().toString());
+                            params.put("contrasenia", binding.etPass.getText().toString());
+                            params.put("fechanacimiento", binding.etDate.getText().toString());
+
+
+                            return params;
+                        }
+
                         @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String> headers = new HashMap<>();
@@ -127,25 +137,12 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
-        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), ServerConfig.serverURL, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    private void explorar(NavController navigation) {
-        Bundle bundle = new Bundle();
-        bundle.putString("token", UserData.getInstance(getActivity().getPreferences(Context.MODE_PRIVATE)).getString(UserData.TOKEN_KEY));
-        navigation.navigate(R.id.Navigate_Login_Explorar, bundle);
     }
 
 }
