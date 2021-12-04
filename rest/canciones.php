@@ -33,6 +33,7 @@ switch($metodo){
         $s->setFetchMode(PDO::FETCH_ASSOC);
         $r = $s->fetchAll();
         echo json_encode($r);
+        break;
     case 'POST':
         $c = conexion();
         $s = $c->prepare("INSERT INTO canciones(nombre, artista, album)VALUES(:u,:s,:v)");
