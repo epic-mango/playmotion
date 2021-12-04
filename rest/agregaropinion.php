@@ -50,7 +50,26 @@ switch($metodo){
 
         }
         echo json_encode($r);
-        break;
+
+    case 'PUT':
+        $c = conexion();
+        $s = $c->prepeare("SELECT idusuario FROM relaciones WHERE idcancion=:c AND idusuario=:o");
+        $s->bindValue(":c",$_GET['idcancion']);
+        $s->bindValue(":o",$_GET['idusuario']);
+        $s->execute();
+        $r = $s->fetchAll();
+        if($r){
+            $m=("UPDATE relaciones SET idemocion=:e WHERE idcancion=:c AND idusuario=:o");
+           // $jwt = JWT::create(['idemocion' => $_GET['idemocion']], Config::FIR, 7200);
+           // $m = array('login' => 'yes', 'jwt' => $jwt);
+
+        }else{
+            $m=("INSERT INTO relaciones(idusuario, idcancion, idemocion) VALUES (:o,:c,:e)");
+           // $m = ['agregaropinion' => 'no']
+        }
+
+
+    break;
     
 }
         

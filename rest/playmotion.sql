@@ -134,6 +134,8 @@ INSERT INTO `emociones` (`id`, `emocion`) VALUES
 (80, 'stupid'),
 (81, 'remorseful');
 
+----------------------------
+
 -- --------------------------------------------------------
 
 --
@@ -191,6 +193,16 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `emociones`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+
+
+INSERT INTO 'canciones' (nombre, artista,album) VALUES ('CyberSex','Doja Cat', 'Hot Pink'),
+('Addiction','Doja Cat','Hot Pink'),
+('Honey','Halsey','If i cant have love, i want power'),
+('Color','Halsey','Badlands'),
+('Libre','Angele','Nonante-Cinq'),
+('I am not a woman, im a god','Halsey','If i cant have love, i want power');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
